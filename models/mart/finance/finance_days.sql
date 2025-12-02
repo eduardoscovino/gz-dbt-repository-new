@@ -25,5 +25,6 @@
      , ship_cost
      , quantity
      , ROUND(revenue/NULLIF(nb_transactions, 0), 2) AS average_basket
+     , nb_transactions
  FROM orders_per_day
  ORDER BY  date_date DESC

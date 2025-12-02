@@ -29,6 +29,15 @@ sources:
 
       - name: ship
         identifier: raw_gz_ship
+      
+      - name: adwords
+        identifier: raw_gz_adwords
+      - name: bing
+        identifier: raw_gz_bing
+      - name: criteo
+        identifier: raw_gz_criteo
+      - name: facebook
+        identifier: raw_gz_facebook
 
 models:
 
@@ -155,3 +164,28 @@ models:
 
       - name: ship_cost
         description: cost paid to carrier
+  
+  - name: int_campaigns
+    description: data from all campaigns
+    columns:
+      - name: paid_source
+        tests:
+          - not_null
+      - name: campaign_name
+        tests:
+          - not_null
+    tests:
+       - unique:
+           column_name: "(campaign_key || '-' || date_date)"
+  
+  - name: finance_campaigns_day
+    description: global kpi
+    columns:
+      - name: ads_margin
+        description: operational_margin - ads_cost
+        tests:
+          - not_null
+      - name: average_basket
+        description: average basket cost for each day
+        tests:
+          - not_null
